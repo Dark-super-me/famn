@@ -1,7 +1,10 @@
 aiohttp
 python-decouple
+hachoir
+Pillow
 telethon-tgcrypto
 telethon
+hurry.filesize
 html_telegraph_poster
 requests
 python-dotenv
