@@ -300,7 +300,6 @@ async def encod(event):
         hehe = f"{out};{dl};{thum};{dtime}"
         key = code(hehe)
         await xxx.delete()
-        inf = await info(dl, event)
         COUNT.remove(user.id)
         await event.client.send_message(
             event.chat_id,
@@ -309,7 +308,6 @@ async def encod(event):
                 [
                     Button.inline("SCREENSHOTS", data=f"sshot{key}"),
                 ],
-                [Button.url("MEDIAINFO", url=inf)],
                 [Button.inline("SUPER COMPRESS", data=f"sencc{key}")],
             ],
         )
