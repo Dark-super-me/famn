@@ -12,8 +12,35 @@
 #
 #    License can be found in < https://github.com/1Danish-00/CompressorBot/blob/main/License> .
 
-from .config import *
 
+import os
+import re
+import io
+import sys
+import math
+import glob
+import time
+import json
+import shutil
+import asyncio
+import inspect
+import requests
+import traceback
+import subprocess
+import telethon.utils
+import dotenv
+from pathlib import Path
+from decouple import config
+from datetime import datetime as dt
+
+from telethon.sessions import StringSession
+from telethon.utils import get_display_name
+from telethon.tl.functions.users import GetFullUserRequest
+from logging import basicConfig, getLogger, INFO, DEBUG, warning
+from telethon.tl.functions.messages import ExportChatInviteRequest as cl
+from telethon import TelegramClient, events, Button, errors, functions, types
+
+dotenv.load_dotenv("config.env")
 COUNT = []
 
 uptime = dt.now()
