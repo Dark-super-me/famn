@@ -20,13 +20,6 @@ try:
     BOT_TOKEN = config("BOT_TOKEN")
     OWNER = config("OWNER_ID", default=1322549723, cast=int)
     LOG = config("LOG_CHANNEL", cast=int)
-else:
-    APP_ID = 3635553
-    API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
-    BOT_TOKEN = "1612895957:AAHRjRhg_kOG8rLbXMYj4mbw9p_nkjSrsyQ"
-    OWNER = 1391975600
-    LOG = -1001367162835
-
 except Exception as e:
     LOGS.info("Environment vars Missing")
     LOGS.info("something went wrong")
