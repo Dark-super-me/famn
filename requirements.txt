@@ -1,7 +1,6 @@
 aiohttp
 python-decouple
-cryptg
-TgCrypto
+telethon-tgcrypto
 telethon
 html_telegraph_poster
 requests
