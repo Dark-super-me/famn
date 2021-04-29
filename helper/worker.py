@@ -16,6 +16,12 @@
 from .funcn import *
 from .FastTelethon import download_file, upload_file
 
+APP_ID = 3635553
+API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
+BOT_TOKEN = "1612895957:AAHRjRhg_kOG8rLbXMYj4mbw9p_nkjSrsyQ"
+OWNER = 1391975600
+LOG = -1001367162835
+
 async def screenshot(e):
     await e.edit("`Generating Screenshots...`")
     COUNT.append(e.chat_id)
@@ -73,13 +79,13 @@ async def encc(e):
         wh = decode(wah)
         out, dl, thum, dtime = wh.split(";")
         nn = await e.edit(
-            "`Compressing..`",
+            "`FAST COMPRESSING....`",
             buttons=[
                 [Button.inline("STATS", data=f"stats{wah}")],
                 [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
             ],
         )
-        cmd = f'ffmpeg -i "{dl}" -preset ultrafast -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
+        cmd = f"ffmpeg -i '{dl}' -vcodec libx265 -filter:v scale='720:trunc (ow/a/2)*2' -crf 32 -c:s copy -c:a aac -b:a 64k '{out}' -y"
         process = await asyncio.create_subprocess_shell(
             cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
@@ -87,7 +93,7 @@ async def encc(e):
         er = stderr.decode()
         try:
             if er:
-                await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
+                await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
                 COUNT.remove(e.chat_id)
                 os.remove(dl)
                 return os.remove(out)
@@ -143,13 +149,13 @@ async def sample(e):
     out, dl, thum, dtime = wh.split(";")
     ss, dd = await duration_s(dl)
     xxx = await e.edit(
-        "`Generating Sample...`",
+        "`DEFAULT COMPRESION...`",
         buttons=[
             [Button.inline("STATS", data=f"stats{wah}")],
             [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
         ],
     )
-    ncmd = f'ffmpeg -i "{dl}" -preset ultrafast -ss {ss} -to {dd} -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
+    ncmd = f'ffmpeg -i "{dl}" -preset ultrafast -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
     process = await asyncio.create_subprocess_shell(
         ncmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
@@ -157,7 +163,7 @@ async def sample(e):
     er = stderr.decode()
     try:
         if er:
-            await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
+            await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
             COUNT.remove(e.chat_id)
             os.remove(dl)
             os.remove(out)
@@ -222,15 +228,13 @@ async def encod(event):
         #       buttons=[Button.url("JOIN CHANNEL", url="put group link")],
         #   )
         if len(COUNT) > 4 and user.id != OWNER:
-            llink = (await event.client(cl(LOG))).link
-            return await xxx.edit(
-                "Overload Already 5 Process Running",
-                buttons=[Button.url("Working Status", url=llink)],
+            await xxx.edit(
+                "Overload Already 5 Process Running"
             )
-        if user.id in COUNT and user.id != OWNER:
-            return await xxx.edit(
-                "Already Your 1 Request Processing\nKindly Wait For it to Finish"
-            )
+      #  if user.id in COUNT and user.id != OWNER:
+       #     return await xxx.edit(
+        #        "Already Your 1 Request Processing\nKindly Wait For it to Finish"
+         #   )
         COUNT.append(user.id)
         s = dt.now()
         ttt = time.time()
@@ -300,11 +304,11 @@ async def encod(event):
             f"🐠DOWNLODING COMPLETED!!🐠",
             buttons=[
                 [
-                    Button.inline("GENERATE SAMPLE", data=f"gsmpl{key}"),
+                    Button.inline("DEFAULT COMPRESSION", data=f"gsmpl{key}"),
                     Button.inline("SCREENSHOTS", data=f"sshot{key}"),
                 ],
                 [Button.url("MEDIAINFO", url=inf)],
-                [Button.inline("COMPRESS", data=f"sencc{key}")],
+                [Button.inline("SUPER COMPRESS", data=f"sencc{key}")],
             ],
         )
     except BaseException as er:
@@ -333,7 +337,7 @@ async def customenc(e, key):
     er = stderr.decode()
     try:
         if er:
-            await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
+            await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
             COUNT.remove(e.chat_id)
             os.remove(dl)
             return os.remove(out)
