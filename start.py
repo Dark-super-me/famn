@@ -20,6 +20,10 @@ API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
 BOT_TOKEN = "1612895957:AAHRjRhg_kOG8rLbXMYj4mbw9p_nkjSrsyQ"
 OWNER_ID = -1001367162835
 LOG = 1760568371
+
+basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
+LOGS = getLogger(__name__)
+
 LOGS.info("Starting...")
 
 
