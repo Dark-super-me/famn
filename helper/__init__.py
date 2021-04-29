@@ -26,6 +26,7 @@ import subprocess
 import sys
 import time
 import traceback
+import dotenv
 from datetime import datetime as dt
 from logging import DEBUG, INFO, basicConfig, getLogger, warning
 from pathlib import Path
