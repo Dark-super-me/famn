@@ -13,8 +13,6 @@
 #    License can be found in < https://github.com/1Danish-00/CompressorBot/blob/main/License> .
 
 from .stuff import *
-OWNER = 1391975600
-
 async def eval(event):
     if event.sender_id != OWNER:
         return
