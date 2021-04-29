@@ -22,6 +22,9 @@ BOT_TOKEN = "1612895957:AAHRjRhg_kOG8rLbXMYj4mbw9p_nkjSrsyQ"
 OWNER = 1391975600
 LOG = -1001367162835
 
+basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
+LOGS = getLogger(__name__)
+
 async def screenshot(e):
     await e.edit("`Generating Screenshots...`")
     COUNT.append(e.chat_id)
