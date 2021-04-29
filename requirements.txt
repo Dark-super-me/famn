@@ -4,3 +4,4 @@ telethon-tgcrypto
 telethon
 html_telegraph_poster
 requests
+python-dotenv
