@@ -13,7 +13,6 @@
 #    License can be found in < https://github.com/1Danish-00/CompressorBot/blob/main/License> .
 
 from html_telegraph_poster import TelegraphPoster
-from html_telegraph import TelegraphPoster
 from .funcn import *
 from .FastTelethon import download_file, upload_file
 
