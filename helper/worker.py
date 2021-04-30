@@ -225,7 +225,7 @@ async def sample(e):
         COUNT.remove(e.chat_id)
         os.remove(dl)
         os.remove(out)
-    except Exception as er:
+     except Exception as er:
         LOGS.info(er)
         return COUNT.remove(e.chat_id)
 
