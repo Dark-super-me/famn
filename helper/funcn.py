@@ -39,6 +39,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from logging import basicConfig, getLogger, INFO, DEBUG, warning
 from telethon.tl.functions.messages import ExportChatInviteRequest as cl
 from telethon import TelegramClient, events, Button, errors, functions, types
+from html_telegraph_poster import TelegraphPoster
 
 dotenv.load_dotenv("config.env")
 COUNT = []
