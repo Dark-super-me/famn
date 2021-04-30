@@ -12,7 +12,6 @@
 #
 #    License can be found in < https://github.com/1Danish-00/CompressorBot/blob/main/License> .
 
-from html_telegraph_poster import TelegraphPoster
 from .funcn import *
 from .FastTelethon import download_file, upload_file
 
@@ -62,8 +61,8 @@ async def screenshot(e):
             "Check Screenshots Above 😁",
             buttons=[
                 [
-                    Button.inline("GENERATE SAMPLE", data=f"gsmpl{wah}"),
-                    Button.inline("COMPRESS", data=f"sencc{wah}"),
+                    Button.inline("COMPRESS", data=f"gsmpl{wah}"),
+                    Button.inline("COMPRESS(SUPER)", data=f"sencc{wah}"),
                 ],
                 [Button.inline("SKIP", data=f"skip{wah}")],
             ],
@@ -97,13 +96,13 @@ async def encc(e):
         wh = decode(wah)
         out, dl, thum, dtime = wh.split(";")
         nn = await e.edit(
-            "`Compressing..`",
+            "`SUPER COMPRESSING..`",
             buttons=[
                 [Button.inline("STATS", data=f"stats{wah}")],
                 [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
             ],
         )
-        cmd = f'ffmpeg -i "{dl}" -preset ultrafast -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
+        cmd = f"ffmpeg -i '{dl}' -vcodec libx265 -filter:v scale='720:trunc (ow/a/2)*2' -crf 32 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? -b:a 64k '{out}' -y"
         process = await asyncio.create_subprocess_shell(
             cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
@@ -111,7 +110,7 @@ async def encc(e):
         er = stderr.decode()
         try:
             if er:
-                await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
+                await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
                 COUNT.remove(e.chat_id)
                 os.remove(dl)
                 return os.remove(out)
@@ -161,60 +160,74 @@ async def encc(e):
 
 
 async def sample(e):
-    wah = e.pattern_match.group(1).decode("UTF-8")
-    wh = decode(wah)
-    COUNT.append(e.chat_id)
-    out, dl, thum, dtime = wh.split(";")
-    ss, dd = await duration_s(dl)
-    xxx = await e.edit(
-        "`Generating Sample...`",
-        buttons=[
-            [Button.inline("STATS", data=f"stats{wah}")],
-            [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
-        ],
-    )
-    ncmd = f'ffmpeg -i "{dl}" -preset ultrafast -ss {ss} -to {dd} -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
-    process = await asyncio.create_subprocess_shell(
-        ncmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
-    )
-    stdout, stderr = await process.communicate()
-    er = stderr.decode()
-    try:
-        if er:
-            await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
-            COUNT.remove(e.chat_id)
-            os.remove(dl)
-            os.remove(out)
-            return
-    except BaseException:
-        pass
-    stdout.decode()
-    ttt = time.time()
-    try:
-        ds = await e.client.send_file(
-            e.chat_id,
-            file=f"{out}",
-            force_document=False,
-            thumb=thum,
-            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, xxx, ttt, "uploading..", file=f"{out}")
-            ),
+     try:
+        es = dt.now()
+        COUNT.append(e.chat_id)
+        wah = e.pattern_match.group(1).decode("UTF-8")
+        wh = decode(wah)
+        out, dl, thum, dtime = wh.split(";")
+        nn = await e.edit(
+            "`Compressing(Default)..`",
             buttons=[
-                [
-                    Button.inline("SCREENSHOTS", data=f"sshot{wah}"),
-                    Button.inline("COMPRESS", data=f"sencc{wah}"),
-                ],
-                [Button.inline("SKIP", data=f"skip{wah}")],
+                [Button.inline("STATS", data=f"stats{wah}")],
+                [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
             ],
         )
+        cmd = f'ffmpeg -i "{dl}" -preset ultrafast -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
+        process = await asyncio.create_subprocess_shell(
+            cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        )
+        stdout, stderr = await process.communicate()
+        er = stderr.decode()
+        try:
+            if er:
+                await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
+                COUNT.remove(e.chat_id)
+                os.remove(dl)
+                return os.remove(out)
+        except BaseException:
+            pass
+        ees = dt.now()
+        ttt = time.time()
+        await nn.delete()
+        nnn = await e.client.send_message(e.chat_id, "`Uploading...`")
+        with open(out, "rb") as f:
+            ok = await upload_file(
+                     client=e.client,
+                     file=f,
+                     name=out,
+                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                         progress(d, t, nnn, ttt, "uploading..")
+                         ),
+                     )
+        ds = await e.client.send_file(
+            e.chat_id,
+            file=ok,
+            force_document=True,
+            thumb=thum)
+        await nnn.delete()
+        org = int(Path(dl).stat().st_size)
+        com = int(Path(out).stat().st_size)
+        pe = 100 - ((com / org) * 100)
+        per = str(f"{pe:.2f}") + "%"
+        eees = dt.now()
+        x = dtime
+        xx = ts(int((ees - es).seconds) * 1000)
+        xxx = ts(int((eees - ees).seconds) * 1000)
+        a1 = await info(dl, e)
+        a2 = await info(out, e)
+        dk = await ds.reply(
+            f"Original Size : {hbs(org)}\nCompressed Size : {hbs(com)}\nCompressed Percentage : {per}\n\nMediainfo: [Before]({a1})//[After]({a2})\n\nDownloaded in {x}\nCompressed in {xx}\nUploaded in {xxx}",
+            link_preview=False,
+        )
+        await ds.forward_to(LOG)
+        await dk.forward_to(LOG)
         COUNT.remove(e.chat_id)
+        os.remove(dl)
         os.remove(out)
-        await xxx.delete()
-    except BaseException:
-        COUNT.remove(e.chat_id)
-        os.remove(out)
-        return
-
+    except Exception as er:
+        LOGS.info(er)
+        return COUNT.remove(e.chat_id)
 
 async def encod(event):
     try:
@@ -324,11 +337,11 @@ async def encod(event):
             f"🐠DOWNLODING COMPLETED!!🐠",
             buttons=[
                 [
-                    Button.inline("GENERATE SAMPLE", data=f"gsmpl{key}"),
+                    Button.inline("COMPRESS", data=f"gsmpl{key}"),
                     Button.inline("SCREENSHOTS", data=f"sshot{key}"),
                 ],
                 [Button.url("MEDIAINFO", url=inf)],
-                [Button.inline("COMPRESS", data=f"sencc{key}")],
+                [Button.inline("SUPER_COMPRESS", data=f"sencc{key}")],
             ],
         )
     except BaseException as er:
@@ -357,7 +370,7 @@ async def customenc(e, key):
     er = stderr.decode()
     try:
         if er:
-            await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
+            await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
             COUNT.remove(e.chat_id)
             os.remove(dl)
             return os.remove(out)
