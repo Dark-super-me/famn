@@ -25,6 +25,21 @@ LOG = -1001367162835
 basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
 LOGS = getLogger(__name__)
 
+#    This file is part of the CompressorBot distribution.
+#    Copyright (c) 2021 Danish_00
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3.
+#
+#    This program is distributed in the hope that it will be useful, but
+#    WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#    General Public License for more details.
+#
+#    License can be found in < https://github.com/1Danish-00/CompressorBot/blob/main/License> .
+
+
 async def screenshot(e):
     await e.edit("`Generating Screenshots...`")
     COUNT.append(e.chat_id)
@@ -82,13 +97,13 @@ async def encc(e):
         wh = decode(wah)
         out, dl, thum, dtime = wh.split(";")
         nn = await e.edit(
-            "`FAST COMPRESSING....`",
+            "`Compressing..`",
             buttons=[
                 [Button.inline("STATS", data=f"stats{wah}")],
                 [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
             ],
         )
-        cmd = f"ffmpeg -i '{dl}' -vcodec libx265 -filter:v scale='720:trunc (ow/a/2)*2' -crf 32 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? -b:a 64k '{out}' -y"
+        cmd = f'ffmpeg -i "{dl}" -preset ultrafast -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
         process = await asyncio.create_subprocess_shell(
             cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
@@ -96,7 +111,7 @@ async def encc(e):
         er = stderr.decode()
         try:
             if er:
-                await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
+                await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
                 COUNT.remove(e.chat_id)
                 os.remove(dl)
                 return os.remove(out)
@@ -152,13 +167,13 @@ async def sample(e):
     out, dl, thum, dtime = wh.split(";")
     ss, dd = await duration_s(dl)
     xxx = await e.edit(
-        "`DEFAULT COMPRESION...`",
+        "`Generating Sample...`",
         buttons=[
             [Button.inline("STATS", data=f"stats{wah}")],
             [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
         ],
     )
-    ncmd = f'ffmpeg -i "{dl}" -preset ultrafast -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
+    ncmd = f'ffmpeg -i "{dl}" -preset ultrafast -ss {ss} -to {dd} -c:v libx265 -crf 27 -map 0:v -c:a aac -map 0:a -c:s copy -map 0:s? "{out}" -y'
     process = await asyncio.create_subprocess_shell(
         ncmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
@@ -166,7 +181,7 @@ async def sample(e):
     er = stderr.decode()
     try:
         if er:
-            await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
+            await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
             COUNT.remove(e.chat_id)
             os.remove(dl)
             os.remove(out)
@@ -231,13 +246,15 @@ async def encod(event):
         #       buttons=[Button.url("JOIN CHANNEL", url="put group link")],
         #   )
         if len(COUNT) > 4 and user.id != OWNER:
-            await xxx.edit(
-                "Overload Already 5 Process Running"
+            llink = (await event.client(cl(LOG))).link
+            return await xxx.edit(
+                "Overload Already 5 Process Running",
+                buttons=[Button.url("Working Status", url=llink)],
             )
-      #  if user.id in COUNT and user.id != OWNER:
-       #     return await xxx.edit(
-        #        "Already Your 1 Request Processing\nKindly Wait For it to Finish"
-         #   )
+        if user.id in COUNT and user.id != OWNER:
+            return await xxx.edit(
+                "Already Your 1 Request Processing\nKindly Wait For it to Finish"
+            )
         COUNT.append(user.id)
         s = dt.now()
         ttt = time.time()
@@ -300,15 +317,18 @@ async def encod(event):
         hehe = f"{out};{dl};{thum};{dtime}"
         key = code(hehe)
         await xxx.delete()
+        inf = await info(dl, event)
         COUNT.remove(user.id)
         await event.client.send_message(
             event.chat_id,
             f"🐠DOWNLODING COMPLETED!!🐠",
             buttons=[
                 [
+                    Button.inline("GENERATE SAMPLE", data=f"gsmpl{key}"),
                     Button.inline("SCREENSHOTS", data=f"sshot{key}"),
                 ],
-                [Button.inline("SUPER COMPRESS", data=f"sencc{key}")],
+                [Button.url("MEDIAINFO", url=inf)],
+                [Button.inline("COMPRESS", data=f"sencc{key}")],
             ],
         )
     except BaseException as er:
@@ -337,7 +357,7 @@ async def customenc(e, key):
     er = stderr.decode()
     try:
         if er:
-            await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
+            await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
             COUNT.remove(e.chat_id)
             os.remove(dl)
             return os.remove(out)
