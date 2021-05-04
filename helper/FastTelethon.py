@@ -1,7 +1,5 @@
-"""
-> Based on parallel_file_transfer.py from mautrix-telegram, with permission to distribute under the MIT license
-> Copyright (C) 2019 Tulir Asokan - https://github.com/tulir/mautrix-telegram
-"""
+# copied from https://github.com/tulir/mautrix-telegram/blob/master/mautrix_telegram/util/parallel_file_transfer.py
+# Copyright (C) 2021 Tulir Asokan
 import asyncio
 import hashlib
 import inspect
@@ -25,7 +23,10 @@ from telethon.tl.types import (Document, InputFileLocation, InputDocumentFileLoc
 
 filename = ""
 
-async_encrypt_attachment = None
+try:
+    from mautrix.crypto.attachments import async_encrypt_attachment
+except ImportError:
+    async_encrypt_attachment = None
 
 log: logging.Logger = logging.getLogger("telethon")
 
