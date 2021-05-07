@@ -64,12 +64,11 @@ def stdr(seconds: int) -> str:
         hours = "0" + str(hours)
     if len(str(seconds)) == 1:
         seconds = "0" + str(seconds)
-    dur = (
+    return (
         ((str(hours) + ":") if hours else "00:")
         + ((str(minutes) + ":") if minutes else "00:")
         + ((str(seconds)) if seconds else "")
     )
-    return dur
 
 
 def ts(milliseconds: int) -> str:
@@ -107,10 +106,11 @@ async def progress(current, total, event, start, type_of_ps, file=None):
         speed = current / diff
         time_to_completion = round((total - current) / speed) * 1000
         progress_str = "`[{0}{1}] {2}%`\n\n".format(
-            "".join(["●" for i in range(math.floor(percentage / 5))]),
-            "".join(["○" for i in range(20 - math.floor(percentage / 5))]),
+            "".join("●" for i in range(math.floor(percentage / 5))),
+            "".join("○" for i in range(20 - math.floor(percentage / 5))),
             round(percentage, 2),
         )
+
         tmp = (
             progress_str
             + "`{0} of {1}`\n\n`✦ Speed: {2}/s`\n\n`✦ ETA: {3}`\n\n".format(
@@ -146,10 +146,7 @@ async def duration_s(file):
     x = round(tsec / 5)
     y = round(tsec / 5 + 30)
     pin = stdr(x)
-    if y < tsec:
-        pon = stdr(y)
-    else:
-        pon = stdr(tsec)
+    pon = stdr(y) if y < tsec else stdr(tsec)
     return pin, pon
 
 
@@ -173,13 +170,12 @@ async def info(file, event):
 
 
 def code(data):
-    key = (
+    return (
         requests.post("https://nekobin.com/api/documents", json={"content": data})
         .json()
         .get("result")
         .get("key")
     )
-    return key
 
 
 def decode(key):
