@@ -120,20 +120,29 @@ async def encc(e):
         ttt = time.time()
         await nn.delete()
         nnn = await e.client.send_message(e.chat_id, "`Uploading...`")
-        with open(out, "rb") as f:
-            ok = await upload_file(
-                     client=e.client,
-                     file=f,
-                     name=out,
-                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                         progress(d, t, nnn, ttt, "uploading..")
-                         ),
-                     )
+     #   with open(out, "rb") as f:
+     #       ok = await upload_file(
+     #                client=e.client,
+     #                file=f,
+     #                name=out,
+     #                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+     #                    progress(d, t, nnn, ttt, "uploading..")
+     #                    ),
+     #                )
+      #  ds = await e.client.send_file(
+      #      e.chat_id,
+      #      file=ok,
+      #      force_document=True,
+      #      thumb=thum)
         ds = await e.client.send_file(
             e.chat_id,
-            file=ok,
+            file=f"{out}",
             force_document=True,
-            thumb=thum)
+            thumb=thum,
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(d, t, nnn, ttt, "uploading..", file=f"{out}")
+            ),
+        )
         await nnn.delete()
         org = int(Path(dl).stat().st_size)
         com = int(Path(out).stat().st_size)
@@ -191,20 +200,29 @@ async def sample(e):
         ttt = time.time()
         await nn.delete()
         nnn = await e.client.send_message(e.chat_id, "`Uploading...`")
-        with open(out, "rb") as f:
-            ok = await upload_file(
-                     client=e.client,
-                     file=f,
-                     name=out,
-                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                         progress(d, t, nnn, ttt, "uploading..")
-                         ),
-                     )
+      #  with open(out, "rb") as f:
+      #      ok = await upload_file(
+      #               client=e.client,
+      #               file=f,
+      #               name=out,
+      #               progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+      #                   progress(d, t, nnn, ttt, "uploading..")
+      #                   ),
+      #               )
+      #  ds = await e.client.send_file(
+      #      e.chat_id,
+      #      file=ok,
+      #      force_document=True,
+      #      thumb=thum)
         ds = await e.client.send_file(
             e.chat_id,
-            file=ok,
+            file=f"{out}",
             force_document=True,
-            thumb=thum)
+            thumb=thum,
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(d, t, nnn, ttt, "uploading..", file=f"{out}")
+            ),
+        )
         await nnn.delete()
         org = int(Path(dl).stat().st_size)
         com = int(Path(out).stat().st_size)
@@ -382,20 +400,29 @@ async def customenc(e, key):
     await nn.delete()
     nnn = await e.client.send_message(e.chat_id, "`Uploading...`")
     try:
-        with open(out, "rb") as f:
-            ok = await upload_file(
-                     client=e.client,
-                     file=f,
-                     name=out,
-                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                         progress(d, t, nnn, ttt, "uploading..")
-                         ),
-                     )
+     #   with open(out, "rb") as f:
+      #      ok = await upload_file(
+      #               client=e.client,
+      #               file=f,
+      #               name=out,
+      #               progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+      #                   progress(d, t, nnn, ttt, "uploading..")
+      #                   ),
+      #               )
+      #  ds = await e.client.send_file(
+       #     e.chat_id,
+       #     file=ok,
+       #     force_document=True,
+       #     thumb=thum)
         ds = await e.client.send_file(
             e.chat_id,
-            file=ok,
+            file=f"{out}",
             force_document=True,
-            thumb=thum)
+            thumb=thum,
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(d, t, nnn, ttt, "uploading..", file=f"{out}")
+            ),
+        )
         await nnn.delete()
     except Exception as er:
         LOGS.info(er)
