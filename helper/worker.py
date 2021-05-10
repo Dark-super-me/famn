@@ -261,8 +261,8 @@ async def encod(event):
         if len(COUNT) > 4 and user.id != OWNER:
             llink = (await event.client(cl(LOG))).link
             return await xxx.edit(
-                "Overload Already 5 Process Running",
-                buttons=[Button.url("Working Status", url=llink)],
+                "Overload Already 5 Process Running by my Master"
+              #  buttons=[Button.url("Working Status", url=llink)],
             )
         if user.id in COUNT and user.id != OWNER:
             return await xxx.edit(
