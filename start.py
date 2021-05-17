@@ -65,6 +65,10 @@ async def _(e):
 async def _(e):
     await screenshot(e)
 
+@cbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"sao(.*)")))
+async def _(e):
+    await sao(e)
+
 
 @cbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gsmpl(.*)")))
 async def _(e):
