@@ -11,15 +11,15 @@
 #    General Public License for more details.
 #
 #    License can be found in < https://github.com/1Danish-00/CompressorBot/blob/main/License> .
-
+import os
 from . import *
 
 try:
-    APP_ID = config("APP_ID", cast=int)
-    API_HASH = config("API_HASH")
-    BOT_TOKEN = config("BOT_TOKEN")
-    OWNER = config("OWNER_ID", default=1322549723, cast=int)
-    LOG = config("LOG_CHANNEL", cast=int)
+    APP_ID = os.environ.get("APP_ID")
+    API_HASH = os.environ.get("API_HASH")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN")
+    OWNER = os.environ.get("OWNER_ID")
+    LOG = os.environ.get("LOG_CHANNEL", cast=int)
 except Exception as e:
     LOGS.info("Environment vars Missing")
     LOGS.info("something went wrong")
