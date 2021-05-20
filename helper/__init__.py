@@ -26,7 +26,6 @@ import subprocess
 import sys
 import time
 import traceback
-import dotenv
 from datetime import datetime as dt
 from logging import DEBUG, INFO, basicConfig, getLogger, warning
 from pathlib import Path
@@ -43,4 +42,3 @@ from telethon.utils import get_display_name
 
 basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
 LOGS = getLogger(__name__)
-dotenv.load_dotenv("config.env")
