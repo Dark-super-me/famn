@@ -64,11 +64,12 @@ def stdr(seconds: int) -> str:
         hours = "0" + str(hours)
     if len(str(seconds)) == 1:
         seconds = "0" + str(seconds)
-    return (
+    dur = (
         ((str(hours) + ":") if hours else "00:")
         + ((str(minutes) + ":") if minutes else "00:")
         + ((str(seconds)) if seconds else "")
     )
+    return dur
 
 
 def ts(milliseconds: int) -> str:
@@ -106,11 +107,10 @@ async def progress(current, total, event, start, type_of_ps, file=None):
         speed = current / diff
         time_to_completion = round((total - current) / speed) * 1000
         progress_str = "`[{0}{1}] {2}%`\n\n".format(
-            "".join("●" for i in range(math.floor(percentage / 5))),
-            "".join("○" for i in range(20 - math.floor(percentage / 5))),
+            "".join(["●" for i in range(math.floor(percentage / 5))]),
+            "".join(["○" for i in range(20 - math.floor(percentage / 5))]),
             round(percentage, 2),
         )
-
         tmp = (
             progress_str
             + "`{0} of {1}`\n\n`✦ Speed: {2}/s`\n\n`✦ ETA: {3}`\n\n".format(
@@ -146,7 +146,10 @@ async def duration_s(file):
     x = round(tsec / 5)
     y = round(tsec / 5 + 30)
     pin = stdr(x)
-    pon = stdr(y) if y < tsec else stdr(tsec)
+    if y < tsec:
+        pon = stdr(y)
+    else:
+        pon = stdr(tsec)
     return pin, pon
 
 
@@ -170,16 +173,27 @@ async def info(file, event):
 
 
 def code(data):
-    return (
-        requests.post("https://nekobin.com/api/documents", json={"content": data})
-        .json()
-        .get("result")
-        .get("key")
-    )
+    try:
+        key = (
+            requests.post("https://nekobin.com/api/documents", json={"content": data})
+            .json()
+            .get("result")
+            .get("key")
+        )
+        a, b, c, d = requests.get(f"https://nekobin.com/raw/{key}").text.split(";")
+        key = key + "01"
+    except BaseException:
+        key = requests.post("https://del.dog/documents", data=data.encode("UTF-8")).json().get('key')
+        key = key + "02"
+    return key
 
 
 def decode(key):
-    a = requests.get(f"https://nekobin.com/raw/{key}")
+    keyy = key[:-2]
+    if key.endswith("01"):
+        a = requests.get(f"https://nekobin.com/raw/{keyy}")
+    elif key.endswith("02"):
+        a = requests.get(f"https://del.dog/raw/{keyy}")
     return a.text
 
 
