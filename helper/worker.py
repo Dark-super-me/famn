@@ -17,9 +17,9 @@ from .FastTelethon import download_file, upload_file
 
 APP_ID = 3635553
 API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
-BOT_TOKEN = "1612895957:AAHrZmaYWx8G4HcDyAUobAzKQQJOXRIT0Yo"
+BOT_TOKEN = "1881783399:AAHX06IevCxyFzPw_d9l6f9yxoYr9MUw2QQ"
 OWNER = 1391975600
-LOG = -1001367162835
+LOG = 
 
 basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
 LOGS = getLogger(__name__)
