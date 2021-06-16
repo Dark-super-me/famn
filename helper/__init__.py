@@ -28,7 +28,9 @@ import time
 import traceback
 import dotenv
 from datetime import datetime as dt
-from logging import DEBUG, INFO, basicConfig, getLogger, warning
+import logging
+from logging.handlers import RotatingFileHandler
+#from logging import DEBUG, INFO, basicConfig, getLogger, warning
 from pathlib import Path
 
 import requests
@@ -41,6 +43,27 @@ from telethon.tl.functions.messages import ExportChatInviteRequest as cl
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.utils import get_display_name
 
+LOG_FILE_ZZGEVC = "log.txt"
+
+if os.path.exists(LOG_FILE_ZZGEVC):
+    with open(LOG_FILE_ZZGEVC, "r+") as f_d:
+        f_d.truncate(0)
+
 basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
 LOGS = getLogger(__name__)
 dotenv.load_dotenv("config.env")
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        RotatingFileHandler(
+            LOG_FILE_ZZGEVC,
+            maxBytes=FREE_USER_MAX_FILE_SIZE,
+            backupCount=10
+        ),
+        logging.StreamHandler()
+    ]
+)
+
+LOGS = logging.getLogger(__name__)
