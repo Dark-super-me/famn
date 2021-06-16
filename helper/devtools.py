@@ -16,9 +16,9 @@ from .stuff import *
 
 APP_ID = 3635553
 API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
-BOT_TOKEN = "1612895957:AAHRjRhg_kOG8rLbXMYj4mbw9p_nkjSrsyQ"
+BOT_TOKEN = "1881783399:AAHX06IevCxyFzPw_d9l6f9yxoYr9MUw2QQ"
 OWNER = 1391975600
-LOG = -1001367162835
+LOG = 
 
 async def eval(event):
     if event.sender_id != OWNER:
