@@ -43,14 +43,15 @@ from telethon.tl.functions.messages import ExportChatInviteRequest as cl
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.utils import get_display_name
 
+FREE_USER_MAX_FILE_SIZE = 2097152000
+
 LOG_FILE_ZZGEVC = "log.txt"
 
 if os.path.exists(LOG_FILE_ZZGEVC):
     with open(LOG_FILE_ZZGEVC, "r+") as f_d:
         f_d.truncate(0)
 
-basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
-LOGS = getLogger(__name__)
+
 dotenv.load_dotenv("config.env")
 logging.basicConfig(
     level=logging.DEBUG,
