@@ -82,7 +82,7 @@ async def _(e):
 async def _(e):
     user = await e.get_chat()
     if user.id == OWNER:
-        await send_file(LOG_FILE_ZZGEVC)
+        await e.client.send_file(e.chat_id, LOG_FILE_ZZGEVC)
     else:
         return
 ######## Callbacks #########
