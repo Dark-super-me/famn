@@ -80,7 +80,7 @@ async def _(e):
 @cbot.on(events.NewMessage(pattern="/log"))
 async def _(e):
     user = await e.get_chat()
-    if user.id = OWNER:
+    if user.id == OWNER:
         await send_file(LOG_FILE_ZZGEVC)
     else:
         return
