@@ -21,8 +21,28 @@ BOT_TOKEN = "1881783399:AAHX06IevCxyFzPw_d9l6f9yxoYr9MUw2QQ"
 OWNER = 1391975600
 LOG = -1001472251228
 
-basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
-LOGS = getLogger(__name__)
+LOG_FILE_ZZGEVC = "log.txt"
+
+if os.path.exists(LOG_FILE_ZZGEVC):
+    with open(LOG_FILE_ZZGEVC, "r+") as f_d:
+        f_d.truncate(0)
+FREE_USER_MAX_FILE_SIZE = 2097152000
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        RotatingFileHandler(
+            LOG_FILE_ZZGEVC,
+            maxBytes=FREE_USER_MAX_FILE_SIZE,
+            backupCount=10
+        ),
+        logging.StreamHandler()
+    ]
+)
+
+LOGS = logging.getLogger(__name__)
 
 LOGS.info("Starting...")
 
@@ -57,7 +77,9 @@ async def _(e):
 async def _(e):
     await help(e)
 
-
+@cbot.on(events.NewMessage(pattern="/log"))
+async def _(e):
+    await sendlog(e)
 ######## Callbacks #########
 
 
