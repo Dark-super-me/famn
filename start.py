@@ -30,7 +30,7 @@ if os.path.exists(LOG_FILE_ZZGEVC):
 FREE_USER_MAX_FILE_SIZE = 2097152000
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     datefmt="%d-%b-%y %H:%M:%S",
     handlers=[
