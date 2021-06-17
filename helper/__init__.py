@@ -54,7 +54,7 @@ if os.path.exists(LOG_FILE_ZZGEVC):
 
 dotenv.load_dotenv("config.env")
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     datefmt="%d-%b-%y %H:%M:%S",
     handlers=[
