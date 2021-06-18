@@ -15,11 +15,10 @@
 from .funcn import *
 from .FastTelethon import download_file, upload_file
 
-APP_ID = 3635553
-API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
-BOT_TOKEN = "1881783399:AAHX06IevCxyFzPw_d9l6f9yxoYr9MUw2QQ"
-OWNER = 1391975600
-LOG = -1001472251228
+APP_ID = 3063577
+API_HASH = "97c5818c3c37920c286852942dac3a21"
+BOT_TOKEN = "1819691069:AAFTmzU1NgpVGpmPO26d7YvcpNaElAsaoto"
+OWNER = 1760568371
 
 basicConfig(format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=INFO)
 LOGS = getLogger(__name__)
@@ -85,7 +84,7 @@ async def stats(e):
         ans = f"Downloaded:\n{ov}\n\nCompressing:\n{ot}"
         await e.answer(ans, cache_time=0, alert=True)
     except BaseException:
-        await e.answer("Someting Went Wrong 🤔\nResend Media", cache_time=0, alert=True)
+        await e.answer("Someting Went Wrong 🤔\nResend Media Zakob Zooma, Bot restarts every 5 hours, check /ping", cache_time=0, alert=True)
 
 
 async def encc(e):
@@ -158,8 +157,8 @@ async def encc(e):
             f"Original Size : {hbs(org)}\nCompressed Size : {hbs(com)}\nCompressed Percentage : {per}\n\nMediainfo: [Before]({a1})//[After]({a2})\n\nDownloaded in {x}\nCompressed in {xx}\nUploaded in {xxx}",
             link_preview=False,
         )
-        await ds.forward_to(LOG)
-        await dk.forward_to(LOG)
+        #await ds.forward_to(LOG)
+        #await dk.forward_to(LOG)
         COUNT.remove(e.chat_id)
         os.remove(dl)
         os.remove(out)
@@ -286,15 +285,19 @@ async def encod(event):
             return await xxx.edit(
                 "Already Your 1 Request Processing\nKindly Wait For it to Finish"
             )
+        if user.id != OWNER:
+            return await xxx.edit(
+                "Zakob Zooma Only"
+            )
         COUNT.append(user.id)
         s = dt.now()
         ttt = time.time()
-        await event.forward_to(LOG)
-        gg = await event.client.get_entity(user.id)
-        name = f"[{get_display_name(gg)}](tg://user?id={user.id})"
-        await event.client.send_message(
-            LOG, f"{len(COUNT)} Downloading Started for user - {name}"
-        )
+        #await event.forward_to(LOG)
+        #gg = await event.client.get_entity(user.id)
+        #name = f"[{get_display_name(gg)}](tg://user?id={user.id})"
+       # await event.client.send_message(
+        #    LOG, f"{len(COUNT)} Downloading Started for user - {name}"
+       # 3)
         dir = f"downloads/{user.id}/"
         if not os.path.isdir(dir):
             os.mkdir(dir)
@@ -440,8 +443,8 @@ async def sao(e):
             f"Original Size : {hbs(org)}\nCompressed Size : {hbs(com)}\nCompressed Percentage : {per}\n\nMediainfo: [Before]({a1})//[After]({a2})\n\nDownloaded in {x}\nCompressed in {xx}\nUploaded in {xxx}",
             link_preview=False,
         )
-        await ds.forward_to(LOG)
-        await dk.forward_to(LOG)
+        #await ds.forward_to(LOG)
+        #await dk.forward_to(LOG)
         COUNT.remove(e.chat_id)
         os.remove(dl)
         os.remove(out)
