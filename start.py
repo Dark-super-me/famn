@@ -16,11 +16,11 @@ import logging
 from logging.handlers import RotatingFileHandler
 from helper._get import *
 
-APP_ID = 3635553
-API_HASH = "8d5b6c1a43d2d6169bd99aad0fc35701"
-BOT_TOKEN = "1881783399:AAHX06IevCxyFzPw_d9l6f9yxoYr9MUw2QQ"
-OWNER = 1391975600
-LOG = -1001472251228
+APP_ID = 3063577
+API_HASH = "97c5818c3c37920c286852942dac3a21"
+BOT_TOKEN = "1819691069:AAFTmzU1NgpVGpmPO26d7YvcpNaElAsaoto"
+OWNER = 1760568371
+#LOG = -1001472251228
 
 LOG_FILE_ZZGEVC = "log.txt"
 
