@@ -43,6 +43,7 @@ from html_telegraph_poster import TelegraphPoster
 
 dotenv.load_dotenv("config.env")
 COUNT = []
+OK = {}
 
 uptime = dt.now()
 os.system("wget https://telegra.ph/file/5c4635e173e7407694a63.jpg -O thumb.jpg")
