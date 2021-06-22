@@ -275,16 +275,7 @@ async def encod(event):
         #        "U Must Subscribe This Channel To Use This Bot",
         #       buttons=[Button.url("JOIN CHANNEL", url="put group link")],
         #   )
-        if len(COUNT) > 4 and user.id != OWNER:
-            llink = (await event.client(cl(LOG))).link
-            return await xxx.edit(
-                "Overload Already 5 Process Running by my Master"
-              #  buttons=[Button.url("Working Status", url=llink)],
-            )
-        if user.id in COUNT and user.id != OWNER:
-            return await xxx.edit(
-                "Already Your 1 Request Processing\nKindly Wait For it to Finish"
-            )
+        
         if user.id != OWNER:
             return await xxx.edit(
                 "Zakob Zooma Only"
