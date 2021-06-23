@@ -40,7 +40,7 @@ LOGS = getLogger(__name__)
 
 async def screenshot(e):
     await e.edit("`Generating Screenshots...`")
-    COUNT.append(e.chat_id)
+    #COUNT.append(e.chat_id)
     wah = e.pattern_match.group(1).decode("UTF-8")
     key = decode(wah)
     out, dl, thum, dtime = key.split(";")
@@ -66,10 +66,10 @@ async def screenshot(e):
                 [Button.inline("SKIP", data=f"skip{wah}")],
             ],
         )
-        COUNT.remove(e.chat_id)
+        #COUNT.remove(e.chat_id)
         shutil.rmtree(wah)
     except Exception:
-        COUNT.remove(e.chat_id)
+        #COUNT.remove(e.chat_id)
         shutil.rmtree(wah)
         return
 
@@ -90,7 +90,7 @@ async def stats(e):
 async def encc(e):
     try:
         es = dt.now()
-        COUNT.append(e.chat_id)
+        #COUNT.append(e.chat_id)
         wah = e.pattern_match.group(1).decode("UTF-8")
         wh = decode(wah)
         out, dl, thum, dtime = wh.split(";")
@@ -110,7 +110,7 @@ async def encc(e):
         try:
             if er:
                 await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
-                COUNT.remove(e.chat_id)
+                #COUNT.remove(e.chat_id)
                 os.remove(dl)
                 return os.remove(out)
         except BaseException:
@@ -159,18 +159,19 @@ async def encc(e):
         )
         #await ds.forward_to(LOG)
         #await dk.forward_to(LOG)
-        COUNT.remove(e.chat_id)
+        #COUNT.remove(e.chat_id)
         os.remove(dl)
         os.remove(out)
     except Exception as er:
         LOGS.info(er)
-        return COUNT.remove(e.chat_id)
+        return
+        #return COUNT.remove(e.chat_id)
 
 
 async def sample(e):
      try:
         es = dt.now()
-        COUNT.append(e.chat_id)
+        #COUNT.append(e.chat_id)
         wah = e.pattern_match.group(1).decode("UTF-8")
         wh = decode(wah)
         out, dl, thum, dtime = wh.split(";")
@@ -190,7 +191,7 @@ async def sample(e):
         try:
             if er:
                 await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
-                COUNT.remove(e.chat_id)
+                #COUNT.remove(e.chat_id)
                 os.remove(dl)
                 return os.remove(out)
         except BaseException:
@@ -237,14 +238,14 @@ async def sample(e):
             f"Original Size : {hbs(org)}\nCompressed Size : {hbs(com)}\nCompressed Percentage : {per}\n\nMediainfo: [Before]({a1})//[After]({a2})\n\nDownloaded in {x}\nCompressed in {xx}\nUploaded in {xxx}",
             link_preview=False,
         )
-        await ds.forward_to(LOG)
-        await dk.forward_to(LOG)
-        COUNT.remove(e.chat_id)
+        #await ds.forward_to(LOG)
+        #await dk.forward_to(LOG)
+        #COUNT.remove(e.chat_id)
         os.remove(dl)
         os.remove(out)
      except Exception as er:
         LOGS.info(er)
-        return COUNT.remove(e.chat_id)
+        #return COUNT.remove(e.chat_id)
 
 async def encod(event):
     try:
@@ -280,7 +281,7 @@ async def encod(event):
             return await xxx.edit(
                 "Zakob Zooma Only"
             )
-        COUNT.append(user.id)
+        #COUNT.append(user.id)
         s = dt.now()
         ttt = time.time()
         #await event.forward_to(LOG)
@@ -327,7 +328,7 @@ async def encod(event):
                 )
         except Exception as er:
             LOGS.info(er)
-            COUNT.remove(user.id)
+            #COUNT.remove(user.id)
             return os.remove(dl)
         es = dt.now()
         kk = dl.split("/")[-1]
@@ -343,7 +344,7 @@ async def encod(event):
         key = code(hehe)
         await xxx.delete()
         inf = await info(dl, event)
-        COUNT.remove(user.id)
+        #COUNT.remove(user.id)
         await event.client.send_message(
             event.chat_id,
             f"🐠DOWNLODING COMPLETED!!🐠",
@@ -358,7 +359,8 @@ async def encod(event):
         )
     except BaseException as er:
         LOGS.info(er)
-        return COUNT.remove(user.id)
+        return
+        #return COUNT.remove(user.id)
 
 
 
@@ -366,7 +368,7 @@ async def encod(event):
 async def sao(e):
     try:
         es = dt.now()
-        COUNT.append(e.chat_id)
+        #COUNT.append(e.chat_id)
         wah = e.pattern_match.group(1).decode("UTF-8")
         wh = decode(wah)
         out, dl, thum, dtime = wh.split(";")
@@ -386,7 +388,7 @@ async def sao(e):
         try:
             if er:
                 await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
-                COUNT.remove(e.chat_id)
+                #COUNT.remove(e.chat_id)
                 os.remove(dl)
                 return os.remove(out)
         except BaseException:
@@ -436,10 +438,11 @@ async def sao(e):
         )
         #await ds.forward_to(LOG)
         #await dk.forward_to(LOG)
-        COUNT.remove(e.chat_id)
+        #COUNT.remove(e.chat_id)
         os.remove(dl)
         os.remove(out)
     except Exception as er:
         LOGS.info(er)
-        return COUNT.remove(e.chat_id)
+        return
+        #return COUNT.remove(e.chat_id)
 
