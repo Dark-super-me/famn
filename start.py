@@ -87,7 +87,7 @@ async def _(e):
 async def _(e):
     user = await e.get_chat()
     if user.id in OWNER:
-        await await e.reply("Shutting Down ...")
+        await e.reply("Shutting Down ...")
         cbot.disconnect()
         quit(1)
     else:
