@@ -282,8 +282,8 @@ async def encod(event):
         s = dt.now()
         ttt = time.time()
         #await event.forward_to(LOG)
-        #gg = await event.client.get_entity(user.id)
-        #name = f"[{get_display_name(gg)}](tg://user?id={user.id})"
+        gg = await event.client.get_entity(user.id)
+        name = f"[{get_display_name(gg)}](tg://user?id={user.id})"
        # await event.client.send_message(
         #    LOG, f"{len(COUNT)} Downloading Started for user - {name}"
        # 3)
