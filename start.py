@@ -82,6 +82,15 @@ async def _(e):
         await e.client.send_file(e.chat_id, LOG_FILE_ZZGEVC)
     else:
         return
+    
+@cbot.on(events.NewMessage(pattern="/off"))
+async def _(e):
+    user = await e.get_chat()
+    if user.id in OWNER:
+        cbot.disconnect()
+        quit(1)
+    else:
+        return    
 ######## Callbacks #########
 
 
