@@ -17,16 +17,25 @@ from .stuff import *
 async def auth(event):
     if event.sender_id not in OWNER:
         return
-    await event.reply("Authorizing ...")
-    cmd = event.text.split(" ", maxsplit=1)[1]
-    COUNT.append(cmd)
+    xxx = await event.reply("Authorizing ...")
+    try:
+       cmd = event.text.split(" ", maxsplit=1)[1]
+       COUNT.append(cmd)
+    except Exception as er:
+       LOGS.info(er)    
+       xxx.edit(er)
     
 async def revoke(event):
     if event.sender_id not in OWNER:
         return
     await event.reply("Revoking...")
-    cmd = event.text.split(" ", maxsplit=1)[1]
-    COUNT.remove(cmd)
+    try:
+        cmd = event.text.split(" ", maxsplit=1)[1]
+        COUNT.remove(cmd)
+    except Exception as er:
+        LOGS.info(er)    
+        xxx.edit(er)    
+            
     
 async def eval(event):
     if event.sender_id not in OWNER:
