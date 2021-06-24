@@ -16,10 +16,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from helper._get import *
 
-APP_ID = 3063577
-API_HASH = "97c5818c3c37920c286852942dac3a21"
-BOT_TOKEN = "1819691069:AAFTmzU1NgpVGpmPO26d7YvcpNaElAsaoto"
-OWNER = 928380180
+
 #LOG = -1001472251228
 
 LOG_FILE_ZZGEVC = "log.txt"
@@ -81,7 +78,7 @@ async def _(e):
 @cbot.on(events.NewMessage(pattern="/log"))
 async def _(e):
     user = await e.get_chat()
-    if user.id == OWNER:
+    if user.id in OWNER:
         await e.client.send_file(e.chat_id, LOG_FILE_ZZGEVC)
     else:
         return
@@ -153,8 +150,13 @@ async def _(e):
 @cbot.on(events.NewMessage(pattern="/bash"))
 async def _(e):
     await bash(e)
-
-
+    
+@cbot.on(events.NewMessage(pattern="/auth"))
+async def _(e):
+    await auth(e)
+@cbot.on(events.NewMessage(pattern="/revoke"))
+async def _(e):
+    await revoke(e)
 ########## AUTO ###########
 
 
