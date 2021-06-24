@@ -167,5 +167,5 @@ async def _(e):
 
 ########### Start ############
 
-LOGS.info("Bot has started.")
+LOGS.info("Malbook Bot has started.")
 cbot.run_until_disconnected()
