@@ -81,7 +81,7 @@ async def stats(e):
         ans = f"Downloaded:\n{ov}\n\nCompressing:\n{ot}"
         await e.answer(ans, cache_time=0, alert=True)
     except BaseException:
-        await e.answer("Someting Went Wrong 🤔\nResend Media Zakob Zooma, Bot restarts every 5 hours, check /ping", cache_time=0, alert=True)
+        await e.answer("Someting Went Wrong 🤔\nResend Media , Bot restarts every 5 hours, check /ping", cache_time=0, alert=True)
 
 
 async def encc(e):
@@ -276,7 +276,7 @@ async def encod(event):
         
         if user.id not in OWNER:
             return await xxx.edit(
-                "Zakob Zooma Only"
+                "Senpai Only"
             )
         #COUNT.append(user.id)
         s = dt.now()
