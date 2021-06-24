@@ -46,7 +46,7 @@ COUNT = []
 OK = {}
 APP_ID = 3063577
 API_HASH = "97c5818c3c37920c286852942dac3a21"
-BOT_TOKEN = "1819691069:AAFTmzU1NgpVGpmPO26d7YvcpNaElAsaoto"
+BOT_TOKEN = "1870547085:AAG0kte6xol7-TIu1VrVhAUgPcbQ3bEZ43o"
 OWNER = []
 uptime = dt.now()
 os.system("wget https://telegra.ph/file/5c4635e173e7407694a63.jpg -O thumb.jpg")
