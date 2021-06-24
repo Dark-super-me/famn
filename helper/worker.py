@@ -274,7 +274,7 @@ async def encod(event):
         #       buttons=[Button.url("JOIN CHANNEL", url="put group link")],
         #   )
         
-        if user.id != OWNER:
+        if user.id not in OWNER:
             return await xxx.edit(
                 "Zakob Zooma Only"
             )
