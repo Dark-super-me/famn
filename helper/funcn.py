@@ -51,6 +51,8 @@ OWNER = []
 uptime = dt.now()
 os.system("wget https://telegra.ph/file/5c4635e173e7407694a63.jpg -O thumb.jpg")
 OWNER.append(1391975600)
+OWNER.append(1760568371)
+OWNER.append(888605132)
 if not os.path.isdir("downloads/"):
     os.mkdir("downloads/")
 if not os.path.isdir("encode/"):
