@@ -20,7 +20,7 @@ async def auth(event):
     xxx = await event.reply("Authorizing ...")
     try:
        cmd = event.text.split(" ", maxsplit=1)[1]
-       COUNT.append(cmd)
+       OWNER.append(cmd)
     except Exception as er:
        LOGS.info(er)    
        xxx.edit(er)
@@ -31,7 +31,7 @@ async def revoke(event):
     await event.reply("Revoking...")
     try:
         cmd = event.text.split(" ", maxsplit=1)[1]
-        COUNT.remove(cmd)
+        OWNER.remove(cmd)
     except Exception as er:
         LOGS.info(er)    
         xxx.edit(er)    
