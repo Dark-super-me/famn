@@ -15,21 +15,21 @@
 from .stuff import *
 
 async def auth(event):
-    if event.sender_id in OWNER:
+    if event.sender_id not in OWNER:
         return
     await event.reply("Authorizing ...")
     cmd = event.text.split(" ", maxsplit=1)[1]
     COUNT.append(cmd)
     
 async def revoke(event):
-    if event.sender_id in OWNER:
+    if event.sender_id not in OWNER:
         return
     await event.reply("Revoking...")
     cmd = event.text.split(" ", maxsplit=1)[1]
     COUNT.remove(cmd)
     
 async def eval(event):
-    if event.sender_id in OWNER:
+    if event.sender_id not in OWNER:
         return
     await event.reply("Processing ...")
     cmd = event.text.split(" ", maxsplit=1)[1]
@@ -77,7 +77,7 @@ async def aexec(code, event):
 
 
 async def bash(event):
-    if event.sender_id in OWNER:
+    if event.sender_id not in OWNER:
         return
     cmd = event.text.split(" ", maxsplit=1)[1]
     process = await asyncio.create_subprocess_shell(
