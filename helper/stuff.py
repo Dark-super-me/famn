@@ -92,5 +92,3 @@ async def back(e):
         ],
     )
 
-async def anidl(event):
-    await anidl(event)
