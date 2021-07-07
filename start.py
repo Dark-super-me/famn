@@ -65,7 +65,10 @@ except Exception as e:
 async def _(e):
     await start(e)
 
-
+@cbot.on(events.callbackquery.CallbackQuery(data=re.compile("anidl")))
+async def _(e):
+    await anidl(e)
+    
 @cbot.on(events.NewMessage(pattern="/ping"))
 async def _(e):
     await up(e)
