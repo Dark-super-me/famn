@@ -352,6 +352,7 @@ async def encod(event):
                 ],
                 [Button.url("MEDIAINFO", url=inf)],
                 [Button.inline("SUPER_COMPRESS", data=f"sencc{key}")],
+                [Button.inline("BETA", data=f"anidl{key}")],
             ],
         )
     except BaseException as er:
@@ -442,4 +443,82 @@ async def sao(e):
         LOGS.info(er)
         return
         #return COUNT.remove(e.chat_id)
-
+async def anidl(e):
+    try:
+        es = dt.now()
+        #COUNT.append(e.chat_id)
+        wah = e.pattern_match.group(1).decode("UTF-8")
+        wh = decode(wah)
+        out, dl, thum, dtime = wh.split(";")
+        nn = await e.edit(
+            "`ANIDL`",
+            buttons=[
+                [Button.inline("STATS", data=f"stats{wah}")],
+                [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
+            ],
+        )
+        cmd = f"ffmpeg -i '{dl}' -map 0 -c:v libx265 -metadata title=SenpaiEncoding -pix_fmt yuv420p -preset medium -s 800x480 -crf 32 -c:a libopus -profile:a aac_he_v2 -ac 2 -ab 45k -vbr 2 -c:s copy '{out}' -y"
+        process = await asyncio.create_subprocess_shell(
+            cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+        )
+        stdout, stderr = await process.communicate()
+        er = stderr.decode()
+        try:
+            if er:
+                await e.edit(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
+                #COUNT.remove(e.chat_id)
+                os.remove(dl)
+                return os.remove(out)
+        except BaseException:
+            pass
+        ees = dt.now()
+        ttt = time.time()
+        await nn.delete()
+        nnn = await e.client.send_message(e.chat_id, "`Uploading...`")
+ #   try:
+     #   with open(out, "rb") as f:
+      #      ok = await upload_file(
+      #               client=e.client,
+      #               file=f,
+      #               name=out,
+      #               progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+      #                   progress(d, t, nnn, ttt, "uploading..")
+      #                   ),
+      #               )
+      #  ds = await e.client.send_file(
+       #     e.chat_id,
+       #     file=ok,
+       #     force_document=True,
+       #     thumb=thum)
+        ds = await e.client.send_file(
+            e.chat_id,
+            file=f"{out}",
+            force_document=True,
+            thumb=thum,
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(d, t, nnn, ttt, "uploading..", file=f"{out}")
+            ),
+        )
+        await nnn.delete()
+        org = int(Path(dl).stat().st_size)
+        com = int(Path(out).stat().st_size)
+        pe = 100 - ((com / org) * 100)
+        per = str(f"{pe:.2f}") + "%"
+        eees = dt.now()
+        x = dtime
+        xx = ts(int((ees - es).seconds) * 1000)
+        xxx = ts(int((eees - ees).seconds) * 1000)
+        a1 = await info(dl, e)
+        a2 = await info(out, e)
+        dk = await ds.reply(
+            f"Original Size : {hbs(org)}\nCompressed Size : {hbs(com)}\nCompressed Percentage : {per}\n\nMediainfo: [Before]({a1})//[After]({a2})\n\nDownloaded in {x}\nCompressed in {xx}\nUploaded in {xxx}",
+            link_preview=False,
+        )
+        #await ds.forward_to(LOG)
+        #await dk.forward_to(LOG)
+        #COUNT.remove(e.chat_id)
+        os.remove(dl)
+        os.remove(out)
+    except Exception as er:
+        LOGS.info(er)
+        return
