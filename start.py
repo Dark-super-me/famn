@@ -150,7 +150,9 @@ async def _(e):
 @cbot.on(events.callbackquery.CallbackQuery(data=re.compile("beck")))
 async def _(e):
     await beck(e)
-
+@cbot.on(events.callbackquery.CallbackQuery(data=re.compile("anidl")))
+async def _(e):
+    await anidl(e)
 
 ########## Direct ###########
 
