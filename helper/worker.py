@@ -457,7 +457,7 @@ async def anidl(e):
                 [Button.inline("CANCEL PROCESS", data=f"skip{wah}")],
             ],
         )
-        cmd = f"ffmpeg -i '{dl}' -map 0 -c:v libx265 -metadata title=SenpaiEncoding -pix_fmt yuv420p -preset medium -s 800x480 -crf 32 -c:a libopus -profile:a aac_he_v2 -ac 2 -ab 45k -vbr 2 -c:s copy '{out}' -y"
+        cmd = f"ffmpeg -i '{dl}' -map 0 -c:v libx265 -metadata title=SenpaiEncoding -pix_fmt yuv420p -preset medium -s 854x480 -crf 29 -c:a libopus -profile:a aac_he_v2 -ac 2 -ab 45k -vbr 2 -c:s copy '{out}' -y"
         process = await asyncio.create_subprocess_shell(
             cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
